@@ -15,8 +15,10 @@
 <% end %>
 
 <div id="postResult">
-  <h2 id="postTitle"></h2>
-  <p id="postBody"></p>
+  <h2 id="productName"></h2>
+  <p id="productDescription"></p>
+    <p id="productPrice"></p>
+      <p id="productInventory"></p>
 </div>
 
 <script type="text/javascript" charset="utf-8">
@@ -31,8 +33,10 @@
 
       posting.done(function(data) {
         var post = data;
-        $("#postTitle").text(product["name"]);
-        $("#postBody").text(post["description"]);
+        $("#productName").text(product["name"]);
+        $("#productPrice").text(product["price"]);
+        $("#productDescription").text(product["description"]);
+        $("#productInventory").text(product["inventory"]);
       });
     });
   });
