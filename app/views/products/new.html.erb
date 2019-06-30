@@ -1,3 +1,4 @@
+
 <h1>New Product</h1>
 <%= form_for @product do |f| %>
   <%= f.label :name %>
@@ -11,33 +12,31 @@
   <br />
   <%= f.label :inventory %>
   <%= f.text_field :inventory %>
-  <%= f.submit "submit" %>
+  <div class="action">
+    <%= f.submit "submit" %>
+  </div>
 <% end %>
 
-<div id="postResult">
+<div id="productResult">
   <h2 id="productName"></h2>
-    <p id="productPrice"></p>
-      <p id="productDescription"></p>
-        <p id="productInventory"></p>
+  <h3 id="productPrice"></h3>
+  <p id="productDescription"></p>
+  <p id="productInventory"></p>
 </div>
 
 <script type="text/javascript" charset="utf-8">
   $(function () {
     $('form').submit(function(event) {
-      //prevent form from submitting the default way
       event.preventDefault();
-
-      var values = $(this).serialize();
-
-      var posting = $.post('/products', values);
-
-      posting.done(function(data) {
-        var product = data;
-        $("#productName").text(product["name"]);
-        $("#productPrice").text(product["price"]);
-        $("#productDescription").text(product["description"]);
-        $("#productInventory").text(product["inventory"]);
-      });
+      var values = $(this).serialize()
+      var prod = $.post('/products', values)
+      prod.done(function(data){
+        var p = data
+        $("#productName").text(p["name"])
+        $("#productDescription").text(p["description"])
+        $("#productPrice").text(p["price"])
+        $("#productInventory").text(p["inventory"])
+      })
     });
   });
 </script>
